@@ -60,7 +60,6 @@ products.forEach((product) => {
         </div>
   `;
 });
-let cartQuanity = "";
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 document.querySelectorAll(".js-added-cart").forEach((button) => {
@@ -83,6 +82,14 @@ document.querySelectorAll(".js-added-cart").forEach((button) => {
       productName: productName,
       quanity: 1,
     });
-    console.log(cart);
+
+    // This how to add number to cartBag
+    let cartQuanity = 0; //set it to 0 first
+
+    cart.forEach((item) => {
+      cartQuanity += item.quanity; //and than make it + 1
+    });
+
+    document.querySelector(".cart-quantity").innerHTML = cartQuanity;
   });
 });
