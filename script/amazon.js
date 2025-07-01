@@ -1,4 +1,5 @@
 import { cart } from "../data/cart.js";
+import { products } from "../data/products.js";
 // because amazon.js in the scripte folder to make it get the file outside that folder need to use " .. "
 
 let productsHTML = "";
