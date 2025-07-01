@@ -469,4 +469,26 @@ const products = [
     priceCents: 2400,
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
+  {
+    id: "f0e3a8c2-9b72-4d93-85ef-9431a7904e21",
+    image: "images/products/umbrella.jpg",
+    name: "The UV umbrella of the years",
+    rating: {
+      stars: 4.5,
+      count: 390,
+    },
+    priceCents: 1000,
+    keywords: ["umbrella", "raining", "anti UV", "mens"],
+  },
+  {
+    id: "4d6c222e-d497-4d86-b54a-e198b0a7af35",
+    image: "images/products/backpack.jpg",
+    name: "The pubg backpack with the Mutiply pockets",
+    rating: {
+      stars: 4,
+      count: 357,
+    },
+    priceCents: 2400,
+    keywords: ["mutiply pocket", "backpack", "apparel", "mens"],
+  },
 ];

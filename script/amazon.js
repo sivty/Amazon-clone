@@ -1,3 +1,6 @@
+import { cart } from "../data/cart.js";
+// because amazon.js in the scripte folder to make it get the file outside that folder need to use " .. "
+
 let productsHTML = "";
 
 products.forEach((product) => {
@@ -49,12 +52,11 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart ">
+          <div class="added-to-cart js-added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png" />
             Added
           </div>
-
-          <button class="add-to-cart-button js-added-cart button-primary"
+          <button class="add-to-cart-button js-add-to-cart button-primary"
           data-product-id="${product.id}"  
           >Add to Cart</button>
         </div>
@@ -62,7 +64,9 @@ products.forEach((product) => {
 });
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
-document.querySelectorAll(".js-added-cart").forEach((button) => {
+
+let timeOutId;
+document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
 
@@ -97,5 +101,20 @@ document.querySelectorAll(".js-added-cart").forEach((button) => {
     });
 
     document.querySelector(".cart-quantity").innerHTML = cartQuantity;
+
+    const addedMessage = document.querySelector(
+      `.js-added-to-cart-${productId}`
+    );
+    addedMessage.classList.add("added-to-cart-visible");
+
+    if (timeOutId) {
+      // check if it trusthy
+      clearTimeout(timeOutId); // Use this to cancel the previous timeout
+    }
+
+    timeOutId = setTimeout(() => {
+      //set the variable for setTimeout so we can cancel
+      addedMessage.classList.remove("added-to-cart-visible");
+    }, 2000);
   });
 });
