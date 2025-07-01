@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js";
+import { cart, addTocart } from "../data/cart.js";
 import { products } from "../data/products.js";
 // because amazon.js in the scripte folder to make it get the file outside that folder need to use " .. "
 
@@ -66,56 +66,41 @@ products.forEach((product) => {
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
+function updateCartQuantity() {
+  // This how to add number to cartBag
+  let cartQuantity = 0; //set it to 0 first
+
+  cart.forEach((cartItems) => {
+    cartQuantity += cartItems.quantity; //and than make it + 1
+  });
+
+  document.querySelector(".cart-quantity").innerHTML = cartQuantity;
+}
+
+function addMessagetobutton(productId) {
+  const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`);
+  addedMessage.classList.add("added-to-cart-visible");
+
+  if (timeOutId) {
+    // check if it trusthy
+    clearTimeout(timeOutId); // Use this to cancel the previous timeout
+  }
+
+  timeOutId = setTimeout(() => {
+    //set the variable for setTimeout so we can cancel
+    addedMessage.classList.remove("added-to-cart-visible");
+  }, 2000);
+}
+
 let timeOutId;
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
 
-    const quantitySelect = document.querySelector(
-      `.js-quantity-selector-${productId}` //DOM can't use product.id so we use productId
-    );
+    addTocart(productId);
 
-    const quantity = Number(quantitySelect.value); //this how to convert string to Number
+    updateCartQuantity();
 
-    let matchingItem;
-
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-
-    if (matchingItem) {
-      matchingItem.quantity += quantity;
-    } else {
-      cart.push({
-        productId: productId,
-        quantity: quantity,
-      });
-    }
-
-    // This how to add number to cartBag
-    let cartQuantity = 0; //set it to 0 first
-
-    cart.forEach((item) => {
-      cartQuantity += item.quantity; //and than make it + 1
-    });
-
-    document.querySelector(".cart-quantity").innerHTML = cartQuantity;
-
-    const addedMessage = document.querySelector(
-      `.js-added-to-cart-${productId}`
-    );
-    addedMessage.classList.add("added-to-cart-visible");
-
-    if (timeOutId) {
-      // check if it trusthy
-      clearTimeout(timeOutId); // Use this to cancel the previous timeout
-    }
-
-    timeOutId = setTimeout(() => {
-      //set the variable for setTimeout so we can cancel
-      addedMessage.classList.remove("added-to-cart-visible");
-    }, 2000);
+    addMessagetobutton(productId);
   });
 });
