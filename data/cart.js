@@ -1,6 +1,6 @@
 import { products } from "../data/products.js";
 
-export const cart = [
+export let cart = [
   {
     productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     quantity: 2,
@@ -34,4 +34,16 @@ export function addTocart(productId) {
       quantity: quantity,
     });
   }
+}
+
+export function removeFromcart(productId) {
+  // function the add cartItem except the productId that we click on (This is how to remove the Item)
+  const newCart = [];
+
+  cart.forEach((cartItems) => {
+    if (cartItems.productId !== productId) {
+      newCart.push(cartItems);
+    }
+  });
+  cart = newCart;
 }
