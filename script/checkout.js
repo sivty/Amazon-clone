@@ -102,5 +102,20 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
 
     const container = document.querySelector(`.js-cart-container-${productId}`); //matchingProdcuts.id = productId
     container.remove();
+    updateCartQuantity(); //we set the UpdateCartQunaitiy to delect link because we want the updateCartQuantity follow the quantity of delect link
   });
 });
+
+function updateCartQuantity() {
+  let cartQuantity = 0; //set it to 0 first
+
+  cart.forEach((cartItems) => {
+    cartQuantity += cartItems.quantity; //and than make it + 1
+  });
+
+  document.querySelector(
+    ".js-checkout-quantity"
+  ).innerHTML = `${cartQuantity} Items`;
+}
+
+updateCartQuantity();

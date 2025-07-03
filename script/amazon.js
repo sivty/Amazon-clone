@@ -64,17 +64,9 @@ products.forEach((product) => {
   `;
 });
 
-document.querySelector(".js-products-grid").innerHTML = productsHTML;
-
-function updateCartQuantity() {
-  // This how to add number to cartBag
-  let cartQuantity = 0; //set it to 0 first
-
-  cart.forEach((cartItems) => {
-    cartQuantity += cartItems.quantity; //and than make it + 1
-  });
-
-  document.querySelector(".cart-quantity").innerHTML = cartQuantity;
+const productsGrid = document.querySelector(".js-products-grid");
+if (productsGrid) {
+  productsGrid.innerHTML = productsHTML;
 }
 
 function addMessagetobutton(productId) {
@@ -90,6 +82,17 @@ function addMessagetobutton(productId) {
     //set the variable for setTimeout so we can cancel
     addedMessage.classList.remove("added-to-cart-visible");
   }, 2000);
+}
+
+function updateCartQuantity() {
+  // This how to add number to cartBag
+  let cartQuantity = 0; //set it to 0 first
+
+  cart.forEach((cartItems) => {
+    cartQuantity += cartItems.quantity; //and than make it + 1
+  });
+
+  document.querySelector(".cart-quantity").innerHTML = cartQuantity;
 }
 
 let timeOutId;
