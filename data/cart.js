@@ -1,15 +1,24 @@
 import { products } from "../data/products.js";
 
-export let cart = [
-  {
-    productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    quantity: 2,
-  },
-  {
-    productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-    quantity: 1,
-  },
-];
+export let cart = JSON.parse(localStorage.getItem("cart")); //get the data from localstorage to the cart
+
+if (!cart) {
+  // this mean if cart is empty or null , cart will run default cart data
+  cart = [
+    {
+      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      quantity: 2,
+    },
+    {
+      productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+      quantity: 1,
+    },
+  ];
+}
+
+function saveToStorage() {
+  localStorage.setItem("cart", JSON.stringify(cart)); //Create the localstorage to save the data.
+}
 
 export function addTocart(productId) {
   const quantitySelect = document.querySelector(
@@ -34,6 +43,8 @@ export function addTocart(productId) {
       quantity: quantity,
     });
   }
+
+  saveToStorage(); // add to cart and store the data
 }
 
 export function removeFromcart(productId) {
@@ -46,4 +57,5 @@ export function removeFromcart(productId) {
     }
   });
   cart = newCart;
+  saveToStorage(); // removeFromcart also have to store the data
 }
