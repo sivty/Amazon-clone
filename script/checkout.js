@@ -1,6 +1,5 @@
-import { cart, removeFromcart } from "../data/cart.js";
+import { cart, removeFromcart, calculateUpdateCart } from "../data/cart.js";
 import { products } from "../data/products.js";
-
 let cartSummaryHTML = "";
 
 cart.forEach((cartItem) => {
@@ -107,12 +106,7 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
 });
 
 function updateCartQuantity() {
-  let cartQuantity = 0; //set it to 0 first
-
-  cart.forEach((cartItems) => {
-    cartQuantity += cartItems.quantity; //and than make it + 1
-  });
-
+  const cartQuantity = calculateUpdateCart();
   document.querySelector(
     ".js-checkout-quantity"
   ).innerHTML = `${cartQuantity} Items`;

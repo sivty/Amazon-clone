@@ -59,3 +59,12 @@ export function removeFromcart(productId) {
   cart = newCart;
   saveToStorage(); // removeFromcart also have to store the data
 }
+
+export function calculateUpdateCart() {
+  let cartQuantity = 0; //set it to 0 first
+
+  cart.forEach((cartItems) => {
+    cartQuantity += cartItems.quantity; //and than make it + 1
+  });
+  return cartQuantity;
+}

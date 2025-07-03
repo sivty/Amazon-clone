@@ -1,4 +1,4 @@
-import { cart, addTocart } from "../data/cart.js";
+import { cart, addTocart, calculateUpdateCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 // because amazon.js in the scripte folder to make it get the file outside that folder need to use " .. "
 
@@ -86,13 +86,10 @@ function addMessagetobutton(productId) {
 
 function updateCartQuantity() {
   // This how to add number to cartBag
-  let cartQuantity = 0; //set it to 0 first
-
-  cart.forEach((cartItems) => {
-    cartQuantity += cartItems.quantity; //and than make it + 1
-  });
+  const cartQuantity = calculateUpdateCart();
 
   document.querySelector(".cart-quantity").innerHTML = cartQuantity;
+  document.getElementById("js-cart-quantity").innerHTML = cartQuantity;
 }
 
 let timeOutId;
@@ -107,3 +104,4 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     addMessagetobutton(productId);
   });
 });
+updateCartQuantity();
