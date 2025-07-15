@@ -31,9 +31,9 @@ export function addTocart(productId) {
 
   let matchingItem;
 
-  cart.forEach((cartItems) => {
-    if (productId === cartItems.productId) {
-      matchingItem = cartItems;
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
     }
   });
 
@@ -61,6 +61,19 @@ export function removeFromcart(productId) {
   });
   cart = newCart;
   saveToStorage(); // removeFromcart also have to store the data
+}
+
+export function updateDeliveryOption(productId, deliveryOptionId) {
+  let matchingItem;
+
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
+  matchingItem.deliveryOptionId = deliveryOptionId;
+
+  saveToStorage();
 }
 
 export function calculateUpdateCart() {
