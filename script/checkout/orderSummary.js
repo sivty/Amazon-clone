@@ -9,6 +9,7 @@ import {
   deliveryOptions,
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
@@ -122,6 +123,8 @@ export function renderOrderSummary() {
       ); //matchingProdcuts.id = productId
       container.remove();
       updateCartQuantity(); //we set the UpdateCartQunaitiy to delect link because we want the updateCartQuantity follow the quantity of delect link
+
+      renderPaymentSummary();
     });
   });
 
@@ -139,6 +142,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary(); //use this function to rerun everything to reload new page
+      renderPaymentSummary();
     });
   });
 }
